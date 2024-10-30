@@ -1,0 +1,18 @@
+<!-- templates/view_collections.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Collections</h2>
+{% for collection in collections %}
+    <div class="box">
+        <p><b>Collection ID:</b> {{ collection.id }}</p>
+        <p><b>Name:</b> {{ collection.name }}</p>
+        <ul>
+            {% for post in collection.posts %}
+                <li><strong>{{ post.thumbnail_title }}</strong> - <a href="{{ post.thumbnail_url }}" target="_blank">View Post</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <p>No collections available.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,54 @@
+<!-- templates/create_product.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Create Product</h2>
+<form action="/product" method="post">
+    <div class="field">
+        <label class="label">Product Name</label>
+        <div class="control">
+            <input class="input" type="text" name="name" required>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Product Image URL</label>
+        <div class="control">
+            <input class="input" type="url" name="image_url">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">SKU</label>
+        <div class="control">
+            <input class="input" type="text" name="sku" required>
+        </div>
+    </div>
+    <div class="control">
+        <button class="button is-primary" type="submit">Create Product</button>
+    </div>
+</form>
+
+<!-- Display list of products below the form -->
+{% if products %}
+    <h3 class="mt-4">Existing Products</h3>
+    <table class="table is-striped is-hoverable mt-2">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Image URL</th>
+                <th>SKU</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td><a href="{{ product.image_url }}" target="_blank">{{ product.image_url }}</a></td>
+                    <td>{{ product.sku }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No products available.</p>
+{% endif %}
+{% endblock %}

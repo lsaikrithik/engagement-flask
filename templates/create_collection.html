@@ -1,0 +1,17 @@
+<!-- templates/create_collection.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Create Collection</h2>
+<form action="/collection" method="post">
+    <div class="field">
+        <label class="label">Collection Name</label>
+        <div class="control">
+            <input class="input" type="text" name="name" required>
+        </div>
+    </div>
+    <div class="control">
+        <button class="button is-primary" type="submit">Create Collection</button>
+    </div>
+</form>
+{% endblock %}

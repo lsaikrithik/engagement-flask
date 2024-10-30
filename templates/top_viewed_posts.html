@@ -1,0 +1,34 @@
+<!-- templates/top_viewed_posts.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="box">
+    <h2 class="subtitle">Top 5 Viewed Engagement Posts</h2>
+
+    <!-- Form to get top viewed posts by tenant_id -->
+    <form action="{{ url_for('show_top_viewed_posts') }}" method="get" class="field has-addons">
+        <div class="control">
+            <input type="text" name="tenant_id" class="input" placeholder="Enter Tenant ID" required>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary">Get Top Viewed Posts</button>
+        </div>
+    </form>
+
+    <!-- Display top viewed posts -->
+    <div class="content mt-4">
+        {% if posts %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <strong>{{ post.thumbnail_title }}</strong> - 
+                        <a href="{{ post.shopping_url }}" target="_blank">View Content</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts available for this Tenant ID.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

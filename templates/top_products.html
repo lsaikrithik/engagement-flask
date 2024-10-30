@@ -1,0 +1,40 @@
+<!-- templates/top_products.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="title">Top 5 Products by Views</h2>
+    
+    <form method="POST" action="/top-products">
+        <div class="field">
+            <label class="label">Tenant ID</label>
+            <div class="control">
+                <input class="input" type="text" name="tenant_id" placeholder="Enter Tenant ID" required>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary" type="submit">Get Top Products</button>
+        </div>
+    </form>
+
+    {% if top_products %}
+        <table class="table is-striped is-hoverable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Post Content URL</th>
+                    <th>Duration Watched (Hours)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in top_products %}
+                    <tr>
+                        <td>{{ product.product_name }}</td>
+                        <td><a href="{{ product.post_content_url }}" target="_blank">{{ product.post_content_url }}</a></td>
+                        <td>{{ "%.2f"|format(product.duration_watched_hours or 0.00) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

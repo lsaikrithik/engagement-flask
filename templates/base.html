@@ -1,0 +1,84 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Engagement App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        body {
+            background-image: url("/static/image.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #4682B4;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2, h3 {
+            color: #4682B4;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        a {
+            color: #003366;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #00509E;
+            text-shadow: 0 0 5px #00509E;
+        }
+        .button.is-primary {
+            background-color: #87CEFA;
+            border-color: #87CEFA;
+            transition: background-color 0.3s;
+            color: #fff;
+        }
+        .button.is-primary:hover {
+            background-color: #4682B4;
+            border-color: #4682B4;
+        }
+        hr {
+            border: 1px solid #4682B4;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Engagement Database App</h1>
+            <nav>
+                <a href="/posts-with-content">Posts with Content</a> |
+                <a href="/product/new">Create Product</a> |
+                <a href="/collection-with-posts/new">Create Collection with Posts</a> |
+                <a href="/top-viewed-posts">Top Viewed Posts</a> |
+                <a href="/top-products">Top Products</a>
+            </nav>
+            <hr>
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+</body>
+</html>

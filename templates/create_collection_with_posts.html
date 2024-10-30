@@ -1,0 +1,39 @@
+<!-- templates/create_collection_with_posts -->
+
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Create Collection with Posts</h2>
+    <form action="/collection-with-posts" method="post">
+        <div class="field">
+            <label class="label">Collection Name</label>
+            <div class="control">
+                <input class="input" type="text" name="name" placeholder="Enter collection name" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Post IDs (comma-separated)</label>
+            <div class="control">
+                <input class="input" type="text" name="post_ids" placeholder="Enter post IDs, e.g., 1,2,3" required>
+            </div>
+        </div>
+
+        <div class="control">
+            <button class="button is-primary" type="submit">Create Collection with Posts</button>
+        </div>
+    </form>
+
+    {% if collection_name %}
+        <h3 class="mt-4">Collection Created: {{ collection_name }}</h3>
+        <ul>
+            {% for post in posts_data %}
+                <li>
+                    <strong>Post ID:</strong> {{ post.id }} <br>
+                    <strong>Description:</strong> {{ post.description }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

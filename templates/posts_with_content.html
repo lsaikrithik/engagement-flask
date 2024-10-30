@@ -1,0 +1,57 @@
+<!-- templates/posts_with_content.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="box">
+    <h2 class="subtitle">Posts with Content and Products</h2>
+
+    <!-- Form to get posts by tenant_id -->
+    <form action="{{ url_for('fetch_posts_with_content') }}" method="get" class="field has-addons">
+        <div class="control">
+            <input type="text" name="tenant_id" class="input" placeholder="Enter Tenant ID" required>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary">Get Posts</button>
+        </div>
+    </form>
+
+    <!-- Display posts with content and products -->
+    <div class="content mt-4">
+        {% if posts %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <strong>Title:</strong> {{ post.thumbnail_title }}<br>
+                        <strong>Thumbnail URL:</strong> <a href="{{ post.thumbnail_url }}" target="_blank">{{ post.thumbnail_url }}</a><br>
+                        <strong>Description:</strong> {{ post.description }}<br>
+                        
+                        <!-- List associated products -->
+                        {% if post.products %}
+                            <ul>
+                                <li><strong>Products Associated:</strong></li>
+                                {% for product in post.products %}
+                                    <li>{{ product.name }} (SKU: {{ product.sku }})</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <!-- Post Content URLs without bullet points -->
+                        <strong>Post Content URLs:</strong><br>
+                        {% if post.content_urls %}
+                            {% for content in post.content_urls %}
+                                <a href="{{ content.url }}" target="_blank">{{ content.url }}</a> (Type: {{ content.file_type }})<br>
+                            {% endfor %}
+                        {% else %}
+                            <p>No content URLs associated with this post.</p>
+                        {% endif %}
+
+                    </li>
+                    <hr>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts available for this Tenant ID.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
